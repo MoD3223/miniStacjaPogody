@@ -1,0 +1,18 @@
+﻿<Page x:Class="miniStacjaPogody.GlowneOkno"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:miniStacjaPogody"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GlowneOkno">
+
+    <Grid>
+        <TextBlock Text="Wybierz lokalizacje" Foreground="LightBlue" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="48"/>
+        <Button x:Name="btnByd" Content="Bydgoszcz" Height="100" Width="200" Click="btnByd_Click" HorizontalAlignment="Left" Margin="0,100,0,0" FontSize="24"/>
+        <Button x:Name="btnEgi" Content="Egipt" Height="100" Width="200" Click="btnEgi_Click" Margin="0,100,0,0" FontSize="24"/>
+        <Button x:Name="btnGre" Content="Grenlandia" Height="100" Width="200" Click="btnGre_Click" HorizontalAlignment="Right" Margin="0,100,0,0" FontSize="24"/>
+
+    </Grid>
+</Page>
