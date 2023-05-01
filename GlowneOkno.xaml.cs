@@ -27,17 +27,17 @@ namespace miniStacjaPogody
 
         private void btnByd_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.NavS.Navigate(new Uri("Bydgoszcz.xaml", UriKind.Relative));
+            MainWindow.NavS.Navigate(new Uri("/Miejsca/Bydgoszcz.xaml", UriKind.Relative));
         }
 
         private void btnGre_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.NavS.Navigate(new Uri("Grenlandia.xaml", UriKind.Relative));
+            MainWindow.NavS.Navigate(new Uri("/Miejsca/Grenlandia.xaml", UriKind.Relative));
         }
 
         private void btnEgi_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.NavS.Navigate(new Uri("Egipt.xaml", UriKind.Relative));
+            MainWindow.NavS.Navigate(new Uri("/Miejsca/Egipt.xaml", UriKind.Relative));
         }
 
 

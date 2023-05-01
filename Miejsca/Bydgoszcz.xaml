@@ -18,11 +18,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Lokalizacja i data" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center"/>
         <TextBlock x:Name="bydData" VerticalAlignment="Center" Grid.Row="1" Foreground="White"/>
@@ -37,7 +33,7 @@
 
 
 
-        <Button Click="powrot" Content="Powrot" Grid.Row="99" Width="200" Height="50" Margin="0,0,300,0"/>
-        <Button Click="admin" Content="Panel Administracyjny" Grid.Row="99" Width="200" Height="50" Margin="300,0,0,0"/>
+        <Button Click="powrot" Content="Powrot" Grid.Row="8" Width="200" Height="50" Margin="0,0,300,0" VerticalAlignment="Bottom"/>
+        <Button Click="admin" Content="Panel Administracyjny" Grid.Row="8" Width="200" Height="50" Margin="300,0,0,0" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>
