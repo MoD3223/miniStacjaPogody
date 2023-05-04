@@ -8,13 +8,43 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PanelAdministracyjny">
 
-    <Grid Background="Red">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        
+        <DatePicker x:Name="DatePick" Margin="10,10,490,0" VerticalAlignment="Top" SelectedDateChanged="DatePick_SelectedDateChanged"/>
+        <Button x:Name="Szukaj" Content="Szukaj" HorizontalAlignment="Left" Margin="490,10,10,0" VerticalAlignment="Top" Click="Szukaj_Click" Width="300"/>
+        <Button x:Name="Edytuj" Content="Edytuj" HorizontalAlignment="Left" Margin="490,10,10,0" VerticalAlignment="Top" Click="Edytuj_Click" Width="300" Grid.Row="1"/>
+        <ComboBox x:Name="wybor" VerticalAlignment="Top" Margin="340,10,340,0" IsReadOnly="True" SelectionChanged="ComboBox_SelectionChanged"/>
+
+        <TextBlock x:Name="LokiData" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="1"/>
+        <TextBlock x:Name="txtBlockData" VerticalAlignment="Center" Grid.Row="2" Foreground="White"/>
+        <TextBlock x:Name="Temperatur" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="3"/>
+        <TextBlock x:Name="txtBlockTemp" VerticalAlignment="Center" Grid.Row="4" Foreground="White"/>
+        <TextBlock x:Name="Opad" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="5"/>
+        <TextBlock x:Name="txtBlockOpady" VerticalAlignment="Center" Grid.Row="6" Foreground="White"/>
+        <TextBlock x:Name="Wiat" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="7"/>
+        <TextBlock x:Name="txtBlockWiatr" VerticalAlignment="Center" Grid.Row="8" Foreground="White"/>
+
+
+
+        <ComboBox x:Name="HourPick" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,450,10" Width="50" Grid.Row="2" IsReadOnly="True" SelectionChanged="HourPick_SelectionChanged"/>
+        <ComboBox x:Name="HourPick2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,450,0" Width="50" Grid.Row="2" IsReadOnly="True" SelectionChanged="HourPick2_SelectionChanged"/>
+        <TextBlock x:Name="txtblock1" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,380,20" Grid.Row="2"/>
+        <TextBlock x:Name="txtblock2" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,23,380,0" Grid.Row="2"/>
+
+
+        <TextBlock x:Name="operacja" Grid.Row="9" VerticalAlignment="Center" TextAlignment="Center"/>
+        <Button Click="powrot" Content="Powrot" Grid.Row="9" Width="200" Height="50" Margin="0,0,300,0" VerticalAlignment="Bottom"/>
+        <Button Click="save" Content="Zapisz" Grid.Row="9" Width="200" Height="50" Margin="300,0,0,0" VerticalAlignment="Bottom"/>
     </Grid>
 </Page>

@@ -56,6 +56,8 @@ namespace miniStacjaPogody
             {
                 Laduj();
             }
+            bydData.Text = $"Bydgoszcz {dzisiaj.ToShortDateString()}\nWschod Slonca: {wschodSlonca.ToString("HH:mm:ss")}\nZachod Slonca: {zachodSlonca.ToString("HH:mm:ss")}";
+            bydOpady.Text = $"Wilgotnosc: {wilgotnosc:F1}%\nSzansa wystapienia opadow: {szansaWystapieniaOpadow:F1}%\nZachmurzenie: {zachmurzenie:F1}%\nCisnienie atmosferyzcne: {cisnienie}hpa";
             _timer = new Timer(Update, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
@@ -88,8 +90,6 @@ namespace miniStacjaPogody
                 zachodSlonca = dzisiaj.AddHours(rd.Next(17, 22)).AddMinutes(rd.Next(0, 60)).AddSeconds(rd.Next(0, 60));
                 losuj = false;
             }
-            bydData.Text = $"Bydgoszcz {dzisiaj.ToShortDateString()}\nWschod Slonca: {wschodSlonca.ToString("HH:mm:ss")}\nZachod Slonca: {zachodSlonca.ToString("HH:mm:ss")}";
-            bydOpady.Text = $"Wilgotnosc: {wilgotnosc:F1}%\nSzansa wystapienia opadow: {szansaWystapieniaOpadow:F1}%\nZachmurzenie: {zachmurzenie:F1}%\nCisnienie atmosferyzcne: {cisnienie}hpa";
 
         }
 
@@ -172,14 +172,14 @@ namespace miniStacjaPogody
 
         private void powrot(object sender, RoutedEventArgs e)
         {
-            DataTemplate.Zapisz(this);
+            DataTemplate.Zapisz(0,dzisiaj);
             MainWindow.Powrot();
             _timer.Dispose();
         }
 
         private void admin(object sender, RoutedEventArgs e)
         {
-            DataTemplate.Zapisz(this);
+            DataTemplate.Zapisz(0, dzisiaj);
             MainWindow.navPanelAdministracyjny();
             _timer.Dispose();
         }

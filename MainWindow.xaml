@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:miniStacjaPogody"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1511" Background="Orange">
+        Title="miniStacjaPogody" Height="600" Width="800" Background="Orange">
     <Grid>
         <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
     </Grid>

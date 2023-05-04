@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ObjectiveC;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -102,20 +103,39 @@ namespace miniStacjaPogody
 
 
 
-        public static void Zapisz(Bydgoszcz bd)
+        public static void Zapisz(int i, DateTime data)
         {
+            if (i == 0)
+            {
             string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bydgoszcz");
             Directory.CreateDirectory(dirPath);
 
-            string filePath = Path.Combine(dirPath, $"{Bydgoszcz.dzisiaj.ToShortDateString()}.xml");
+            string filePath = Path.Combine(dirPath, $"{data.ToShortDateString()}.xml");
 
+                if (data != DateTime.Today && !File.Exists(filePath))
+                {
+                    Bydgoszcz.tempMin = 0;
+                    Bydgoszcz.temp = 0;
+                    Bydgoszcz.tempMax = 0;
+                    Bydgoszcz.tempOdczuwalna = 0;
+                    Bydgoszcz.tempOdczuwalnaMin = 0;
+                    Bydgoszcz.tempOdczuwalnaMax = 0;
+                    Bydgoszcz.wilgotnosc = 0;
+                    Bydgoszcz.szansaWystapieniaOpadow = 0;
+                    Bydgoszcz.zachmurzenie = 0;
+                    Bydgoszcz.predkoscWiatru = 0;
+                    Bydgoszcz.kierunekWiatru = 0;
+                    Bydgoszcz.cisnienie = 0;
+                    Bydgoszcz.wschodSlonca = data;
+                    Bydgoszcz.zachodSlonca = data;
+                }
             using (var writer = new StreamWriter(filePath))
             {
                 var serializer = new XmlSerializer(typeof(DataTemplate));
                 serializer.Serialize(writer, new DataTemplate
                 {
                     Miejsce = "Bydgoszcz",
-                    Data = Bydgoszcz.dzisiaj,
+                    Data = data,
                     Wschod_Slonca = Bydgoszcz.wschodSlonca,
                     Zachod_Slonca = Bydgoszcz.zachodSlonca,
                     Temperatura_Minimalna = Bydgoszcz.tempMin,
@@ -134,74 +154,113 @@ namespace miniStacjaPogody
             }
 
             Poprawka(filePath);
-        }
-
-        public static void Zapisz(Egipt eg)
-        {
-            string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Egipt");
-            Directory.CreateDirectory(dirPath);
-
-            string filePath = Path.Combine(dirPath, $"{Egipt.dzisiaj.ToShortDateString()}.xml");
-
-            using (var writer = new StreamWriter(filePath))
-            {
-                var serializer = new XmlSerializer(typeof(DataTemplate));
-                serializer.Serialize(writer, new DataTemplate
-                {
-                    Miejsce = "Egipt",
-                    Data = Egipt.dzisiaj,
-                    Wschod_Slonca = Egipt.wschodSlonca,
-                    Zachod_Slonca = Egipt.zachodSlonca,
-                    Temperatura_Minimalna = Egipt.tempMin,
-                    Temperatura_Aktualna = Egipt.temp,
-                    Temperatura_Maksymalna = Egipt.tempMax,
-                    Temperatura_Odczuwalna = Egipt.tempOdczuwalna,
-                    Temperatura_OdczuwalnaMin = Egipt.tempOdczuwalnaMin,
-                    Temperatura_OdczuwalnaMax = Egipt.tempOdczuwalnaMax,
-                    WilgotnoscProc = Egipt.wilgotnosc,
-                    Szansa_Wystapienia_OpadowProc = Egipt.szansaWystapieniaOpadow,
-                    ZachmurzenieProc = Egipt.zachmurzenie,
-                    Predkosc_Wiatru_kmh = Egipt.predkoscWiatru,
-                    Kierunek_Wiatru = Egipt.kierunekWiatru,
-                    Cisnienie_Atmosferyczne = Egipt.cisnienie
-                });
             }
-
-            Poprawka(filePath);
-        }
-
-
-        public static void Zapisz(Grenlandia gr)
-        {
-            string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Grenlandia");
-            Directory.CreateDirectory(dirPath);
-
-            string filePath = Path.Combine(dirPath, $"{Grenlandia.dzisiaj.ToShortDateString()}.xml");
-
-            using (var writer = new StreamWriter(filePath))
+            else if (i == 1)
             {
-                var serializer = new XmlSerializer(typeof(DataTemplate));
-                serializer.Serialize(writer, new DataTemplate
+                string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Egipt");
+                Directory.CreateDirectory(dirPath);
+
+                string filePath = Path.Combine(dirPath, $"{data.ToShortDateString()}.xml");
+
+
+                //
+                if (data != DateTime.Today && !File.Exists(filePath))
                 {
-                    Miejsce = "Grenlandia",
-                    Data = Grenlandia.dzisiaj,
-                    Wschod_Slonca = Grenlandia.wschodSlonca,
-                    Zachod_Slonca = Grenlandia.zachodSlonca,
-                    Temperatura_Minimalna = Grenlandia.tempMin,
-                    Temperatura_Aktualna = Grenlandia.temp,
-                    Temperatura_Maksymalna = Grenlandia.tempMax,
-                    Temperatura_Odczuwalna = Grenlandia.tempOdczuwalna,
-                    Temperatura_OdczuwalnaMin = Grenlandia.tempOdczuwalnaMin,
-                    Temperatura_OdczuwalnaMax = Grenlandia.tempOdczuwalnaMax,
-                    WilgotnoscProc = Grenlandia.wilgotnosc,
-                    Szansa_Wystapienia_OpadowProc = Grenlandia.szansaWystapieniaOpadow,
-                    ZachmurzenieProc = Grenlandia.zachmurzenie,
-                    Predkosc_Wiatru_kmh = Grenlandia.predkoscWiatru,
-                    Kierunek_Wiatru = Grenlandia.kierunekWiatru,
-                    Cisnienie_Atmosferyczne = Grenlandia.cisnienie
-                });
+                    Egipt.tempMin = 0;
+                    Egipt.temp = 0;
+                    Egipt.tempMax = 0;
+                    Egipt.tempOdczuwalna = 0;
+                    Egipt.tempOdczuwalnaMin = 0;
+                    Egipt.tempOdczuwalnaMax = 0;
+                    Egipt.wilgotnosc = 0;
+                    Egipt.szansaWystapieniaOpadow = 0;
+                    Egipt.zachmurzenie = 0;
+                    Egipt.predkoscWiatru = 0;
+                    Egipt.kierunekWiatru = 0;
+                    Egipt.cisnienie = 0;
+                    Egipt.wschodSlonca = data;
+                    Egipt.zachodSlonca = data;
+                }
+
+
+                using (var writer = new StreamWriter(filePath))
+                {
+                    var serializer = new XmlSerializer(typeof(DataTemplate));
+                    serializer.Serialize(writer, new DataTemplate
+                    {
+                        Miejsce = "Egipt",
+                        Data = data,
+                        Wschod_Slonca = Egipt.wschodSlonca,
+                        Zachod_Slonca = Egipt.zachodSlonca,
+                        Temperatura_Minimalna = Egipt.tempMin,
+                        Temperatura_Aktualna = Egipt.temp,
+                        Temperatura_Maksymalna = Egipt.tempMax,
+                        Temperatura_Odczuwalna = Egipt.tempOdczuwalna,
+                        Temperatura_OdczuwalnaMin = Egipt.tempOdczuwalnaMin,
+                        Temperatura_OdczuwalnaMax = Egipt.tempOdczuwalnaMax,
+                        WilgotnoscProc = Egipt.wilgotnosc,
+                        Szansa_Wystapienia_OpadowProc = Egipt.szansaWystapieniaOpadow,
+                        ZachmurzenieProc = Egipt.zachmurzenie,
+                        Predkosc_Wiatru_kmh = Egipt.predkoscWiatru,
+                        Kierunek_Wiatru = Egipt.kierunekWiatru,
+                        Cisnienie_Atmosferyczne = Egipt.cisnienie
+                    });
+                }
+
+                Poprawka(filePath);
             }
-            Poprawka(filePath);
+            else
+            {
+                string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Grenlandia");
+                Directory.CreateDirectory(dirPath);
+
+                string filePath = Path.Combine(dirPath, $"{data.ToShortDateString()}.xml");
+
+                //
+                if (data != DateTime.Today && !File.Exists(filePath))
+                {
+                    Grenlandia.tempMin = 0;
+                    Grenlandia.temp = 0;
+                    Grenlandia.tempMax = 0;
+                    Grenlandia.tempOdczuwalna = 0;
+                    Grenlandia.tempOdczuwalnaMin = 0;
+                    Grenlandia.tempOdczuwalnaMax = 0;
+                    Grenlandia.wilgotnosc = 0;
+                    Grenlandia.szansaWystapieniaOpadow = 0;
+                    Grenlandia.zachmurzenie = 0;
+                    Grenlandia.predkoscWiatru = 0;
+                    Grenlandia.kierunekWiatru = 0;
+                    Grenlandia.cisnienie = 0;
+                    Grenlandia.wschodSlonca = data;
+                    Grenlandia.zachodSlonca = data;
+                }
+
+
+                using (var writer = new StreamWriter(filePath))
+                {
+                    var serializer = new XmlSerializer(typeof(DataTemplate));
+                    serializer.Serialize(writer, new DataTemplate
+                    {
+                        Miejsce = "Grenlandia",
+                        Data = data,
+                        Wschod_Slonca = Grenlandia.wschodSlonca,
+                        Zachod_Slonca = Grenlandia.zachodSlonca,
+                        Temperatura_Minimalna = Grenlandia.tempMin,
+                        Temperatura_Aktualna = Grenlandia.temp,
+                        Temperatura_Maksymalna = Grenlandia.tempMax,
+                        Temperatura_Odczuwalna = Grenlandia.tempOdczuwalna,
+                        Temperatura_OdczuwalnaMin = Grenlandia.tempOdczuwalnaMin,
+                        Temperatura_OdczuwalnaMax = Grenlandia.tempOdczuwalnaMax,
+                        WilgotnoscProc = Grenlandia.wilgotnosc,
+                        Szansa_Wystapienia_OpadowProc = Grenlandia.szansaWystapieniaOpadow,
+                        ZachmurzenieProc = Grenlandia.zachmurzenie,
+                        Predkosc_Wiatru_kmh = Grenlandia.predkoscWiatru,
+                        Kierunek_Wiatru = Grenlandia.kierunekWiatru,
+                        Cisnienie_Atmosferyczne = Grenlandia.cisnienie
+                    });
+                }
+                Poprawka(filePath);
+            }
         }
 
         public static void Poprawka(string nazwa)
@@ -221,8 +280,6 @@ namespace miniStacjaPogody
             }
             doc.Save(nazwa);
         }
-
-
 
 
     }
