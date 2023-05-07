@@ -37,14 +37,31 @@
 
 
 
-        <ComboBox x:Name="HourPick" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,450,10" Width="50" Grid.Row="2" IsReadOnly="True" SelectionChanged="HourPick_SelectionChanged"/>
-        <ComboBox x:Name="HourPick2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,450,0" Width="50" Grid.Row="2" IsReadOnly="True" SelectionChanged="HourPick2_SelectionChanged"/>
+        <ComboBox x:Name="HourPick" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,450,10" Width="50" Grid.Row="2" IsReadOnly="True"/>
+        <ComboBox x:Name="HourPick2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,450,0" Width="50" Grid.Row="2" IsReadOnly="True"/>
         <TextBlock x:Name="txtblock1" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,380,20" Grid.Row="2"/>
         <TextBlock x:Name="txtblock2" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,23,380,0" Grid.Row="2"/>
+        <ComboBox x:Name="MinPick" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,310,10" Width="50" Grid.Row="2" IsReadOnly="True"/>
+        <ComboBox x:Name="MinPick2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,310,0" Width="50" Grid.Row="2" IsReadOnly="True"/>
+        <TextBlock x:Name="txtBlock3" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,240,20" Grid.Row="2"/>
+        <TextBlock x:Name="txtBlock4" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,23,240,0" Grid.Row="2"/>
+        <ComboBox x:Name="SecPick" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,170,10" Width="50" Grid.Row="2" IsReadOnly="True"/>
+        <ComboBox x:Name="SecPick2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,30,170,0" Width="50" Grid.Row="2" IsReadOnly="True"/>
+        <ComboBox x:Name="CtempMin1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,350,100" Width="50" Grid.Row="4" IsReadOnly="True"/>
+        <TextBlock x:Name="txtblock5" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,280,100" Grid.Row="4"/>
+        <ComboBox x:Name="CtempMin2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,210,100" Width="50" Grid.Row="4" IsReadOnly="True"/>
+        <ComboBox x:Name="CtempMax1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,350,57" Width="50" Grid.Row="4" IsReadOnly="True"/>
+        <TextBlock x:Name="txtblock6" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,280,60" Grid.Row="4"/>
+        <ComboBox x:Name="CtempMax2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,210,57" Width="50" Grid.Row="4" IsReadOnly="True"/>
+        <ComboBox x:Name="CtempAktualna1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,350,15" Width="50" Grid.Row="4" IsReadOnly="True"/>
+        <TextBlock x:Name="txtblock7" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,280,15" Grid.Row="4"/>
+        <ComboBox x:Name="CtempAktualna2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,210,15" Width="50" Grid.Row="4" IsReadOnly="True"/>
+        <ComboBox x:Name="CtempOMin1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,33,250,0" Width="50" Grid.Row="4"/>
+
 
 
         <TextBlock x:Name="operacja" Grid.Row="9" VerticalAlignment="Center" TextAlignment="Center"/>
         <Button Click="powrot" Content="Powrot" Grid.Row="9" Width="200" Height="50" Margin="0,0,300,0" VerticalAlignment="Bottom"/>
-        <Button Click="save" Content="Zapisz" Grid.Row="9" Width="200" Height="50" Margin="300,0,0,0" VerticalAlignment="Bottom"/>
+        <Button x:Name="savebtn" Click="save" Content="Zapisz" Grid.Row="9" Width="200" Height="50" Margin="300,0,0,0" VerticalAlignment="Bottom" IsEnabled="False"/>
     </Grid>
 </Page>

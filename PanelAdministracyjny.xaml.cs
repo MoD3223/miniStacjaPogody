@@ -212,17 +212,5 @@ namespace miniStacjaPogody
         {
             savebtn.IsEnabled = true;
         }
-
-        private void HourPick_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int hour = (int)HourPick.SelectedValue;
-            //
-            
-        }
-
-        private void HourPick2_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            int hour = (int)HourPick2.SelectedValue;
-        }
     }
 }
