@@ -21,13 +21,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Lokalizacja i data" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center"/>
-        <TextBlock x:Name="bydData" VerticalAlignment="Center" Grid.Row="1" Foreground="White"/>
+        <TextBlock x:Name="bydData" VerticalAlignment="Center" Grid.Row="1" Foreground="White" FontSize="15"/>
         <TextBlock Text="Temperatura" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="2"/>
-        <TextBlock x:Name="bydTemp" VerticalAlignment="Center" Grid.Row="3" Foreground="White"/>
+        <TextBlock x:Name="bydTemp" VerticalAlignment="Center" Grid.Row="3" Foreground="White" FontSize="15"/>
         <TextBlock Text="Opady" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="4"/>
-        <TextBlock x:Name="bydOpady" VerticalAlignment="Center" Grid.Row="5" Foreground="White"/>
+        <TextBlock x:Name="bydOpady" VerticalAlignment="Center" Grid.Row="5" Foreground="White" FontSize="15"/>
         <TextBlock Text="Wiatr" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="6"/>
-        <TextBlock x:Name="bydWiatr" VerticalAlignment="Center" Grid.Row="7" Foreground="White"/>
+        <TextBlock x:Name="bydWiatr" VerticalAlignment="Center" Grid.Row="7" Foreground="White" FontSize="15"/>
 
 
 

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ObjectiveC;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -209,7 +208,7 @@ namespace miniStacjaPogody
 
                 Poprawka(filePath);
             }
-            else
+            else if(i==2)
             {
                 string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Grenlandia");
                 Directory.CreateDirectory(dirPath);
@@ -261,6 +260,71 @@ namespace miniStacjaPogody
                 }
                 Poprawka(filePath);
             }
+            else if (i == 10)
+            {
+                string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bydgoszcz");
+                Directory.CreateDirectory(dirPath);
+
+                string filePath = Path.Combine(dirPath, $"{data.ToShortDateString()}.xml");
+
+                if (data != DateTime.Today && !File.Exists(filePath))
+                {
+                    PanelAdministracyjny.tempMin = 0;
+                    Bydgoszcz.temp = 0;
+                    Bydgoszcz.tempMax = 0;
+                    Bydgoszcz.tempOdczuwalna = 0;
+                    Bydgoszcz.tempOdczuwalnaMin = 0;
+                    Bydgoszcz.tempOdczuwalnaMax = 0;
+                    Bydgoszcz.wilgotnosc = 0;
+                    Bydgoszcz.szansaWystapieniaOpadow = 0;
+                    Bydgoszcz.zachmurzenie = 0;
+                    Bydgoszcz.predkoscWiatru = 0;
+                    Bydgoszcz.kierunekWiatru = 0;
+                    Bydgoszcz.cisnienie = 0;
+                    Bydgoszcz.wschodSlonca = data;
+                    Bydgoszcz.zachodSlonca = data;
+                }
+                using (var writer = new StreamWriter(filePath))
+                {
+                    var serializer = new XmlSerializer(typeof(DataTemplate));
+                    serializer.Serialize(writer, new DataTemplate
+                    {
+                        Miejsce = "Bydgoszcz",
+                        Data = data,
+                        Wschod_Slonca = Bydgoszcz.wschodSlonca,
+                        Zachod_Slonca = Bydgoszcz.zachodSlonca,
+                        Temperatura_Minimalna = Bydgoszcz.tempMin,
+                        Temperatura_Aktualna = Bydgoszcz.temp,
+                        Temperatura_Maksymalna = Bydgoszcz.tempMax,
+                        Temperatura_Odczuwalna = Bydgoszcz.tempOdczuwalna,
+                        Temperatura_OdczuwalnaMin = Bydgoszcz.tempOdczuwalnaMin,
+                        Temperatura_OdczuwalnaMax = Bydgoszcz.tempOdczuwalnaMax,
+                        WilgotnoscProc = Bydgoszcz.wilgotnosc,
+                        Szansa_Wystapienia_OpadowProc = Bydgoszcz.szansaWystapieniaOpadow,
+                        ZachmurzenieProc = Bydgoszcz.zachmurzenie,
+                        Predkosc_Wiatru_kmh = Bydgoszcz.predkoscWiatru,
+                        Kierunek_Wiatru = Bydgoszcz.kierunekWiatru,
+                        Cisnienie_Atmosferyczne = Bydgoszcz.cisnienie
+                    });
+                }
+
+                Poprawka(filePath);
+            }
+            else if (i == 11)
+            {
+
+            }
+            else if (i == 12)
+            {
+
+            }
+
+
+
+
+
+
+
         }
 
         public static void Poprawka(string nazwa)
