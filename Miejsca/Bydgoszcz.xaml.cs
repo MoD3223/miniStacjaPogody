@@ -56,8 +56,9 @@ namespace miniStacjaPogody
             {
                 Laduj();
             }
+            Kalibracja.CzytajKalibracje("Bydgoszcz");
             bydData.Text = $"Bydgoszcz {dzisiaj.ToShortDateString()}\nWschod Slonca: {wschodSlonca.ToString("HH:mm:ss")}\nZachod Slonca: {zachodSlonca.ToString("HH:mm:ss")}";
-            bydOpady.Text = $"Wilgotnosc: {wilgotnosc:F1}%\nSzansa wystapienia opadow: {szansaWystapieniaOpadow:F1}%\nZachmurzenie: {zachmurzenie:F1}%\nCisnienie atmosferyzcne: {cisnienie}hpa";
+            bydOpady.Text = $"Wilgotnosc: {(wilgotnosc + Kalibracja.KalibracjaWilgotnoscProc):F1}%\nSzansa wystapienia opadow: {(szansaWystapieniaOpadow + Kalibracja.KalibracjaSzansaWystapieniaOpadowProc):F1}%\nZachmurzenie: {(zachmurzenie + Kalibracja.KalibracjaZachmurzenieProc):F1}%\nCisnienie atmosferyzcne: {cisnienie + Kalibracja.KalibracjaCisnienie}hpa";
             _timer = new Timer(Update, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
@@ -162,8 +163,8 @@ namespace miniStacjaPogody
 
         private void AktualizujTekst()
         {
-            bydTemp.Text = $"Temperatura minimalna: {tempMin:F1}°C\nTemperatura maksymalna: {tempMax:F1}°C\nTemperatura aktualna: {temp:F1}°C\n\nTemperatura odczuwalna minimalna: {tempOdczuwalnaMin:F1}°C\nTemperatura odczuwalna maksymalna: {tempOdczuwalnaMax:F1}°C\nTemperatura odczuwalna aktualna: {tempOdczuwalna:F1}°C";
-            bydWiatr.Text = $"Predkosc wiatru: {predkoscWiatru:F1}km/h\nKierunek wiatru: {kierunekWiatru}°";
+            bydTemp.Text = $"Temperatura minimalna: {(tempMin + Kalibracja.KalibracjaTemperatura):F1}°C\nTemperatura maksymalna: {(tempMax + Kalibracja.KalibracjaTemperatura):F1}°C\nTemperatura aktualna: {(temp + Kalibracja.KalibracjaTemperatura):F1}°C\n\nTemperatura odczuwalna minimalna: {(tempOdczuwalnaMin + Kalibracja.KalibracjaTemperaturaOdczuwalna):F1}°C\nTemperatura odczuwalna maksymalna: {(tempOdczuwalnaMax + Kalibracja.KalibracjaTemperaturaOdczuwalna):F1}°C\nTemperatura odczuwalna aktualna: {(tempOdczuwalna + Kalibracja.KalibracjaTemperaturaOdczuwalna):F1}°C";
+            bydWiatr.Text = $"Predkosc wiatru: {(predkoscWiatru + Kalibracja.KalibracjaPredkoscWiatru):F1}km/h\nKierunek wiatru: {(kierunekWiatru + Kalibracja.KalibracjaKierunekWiatru)}°";
         }
 
 

@@ -270,19 +270,19 @@ namespace miniStacjaPogody
                 if (data != DateTime.Today && !File.Exists(filePath))
                 {
                     PanelAdministracyjny.tempMin = 0;
-                    Bydgoszcz.temp = 0;
-                    Bydgoszcz.tempMax = 0;
-                    Bydgoszcz.tempOdczuwalna = 0;
-                    Bydgoszcz.tempOdczuwalnaMin = 0;
-                    Bydgoszcz.tempOdczuwalnaMax = 0;
-                    Bydgoszcz.wilgotnosc = 0;
-                    Bydgoszcz.szansaWystapieniaOpadow = 0;
-                    Bydgoszcz.zachmurzenie = 0;
-                    Bydgoszcz.predkoscWiatru = 0;
-                    Bydgoszcz.kierunekWiatru = 0;
-                    Bydgoszcz.cisnienie = 0;
-                    Bydgoszcz.wschodSlonca = data;
-                    Bydgoszcz.zachodSlonca = data;
+                    PanelAdministracyjny.temp = 0;
+                    PanelAdministracyjny.tempMax = 0;
+                    PanelAdministracyjny.tempOdczuwalna = 0;
+                    PanelAdministracyjny.tempOdczuwalnaMin = 0;
+                    PanelAdministracyjny.tempOdczuwalnaMax = 0;
+                    PanelAdministracyjny.wilgotnosc = 0;
+                    PanelAdministracyjny.szansaWystapieniaOpadow = 0;
+                    PanelAdministracyjny.zachmurzenie = 0;
+                    PanelAdministracyjny.predkoscWiatru = 0;
+                    PanelAdministracyjny.kierunekWiatru = 0;
+                    PanelAdministracyjny.cisnienie = 0;
+                    PanelAdministracyjny.wschodSlonca = data;
+                    PanelAdministracyjny.zachodSlonca = data;
                 }
                 using (var writer = new StreamWriter(filePath))
                 {
@@ -291,31 +291,138 @@ namespace miniStacjaPogody
                     {
                         Miejsce = "Bydgoszcz",
                         Data = data,
-                        Wschod_Slonca = Bydgoszcz.wschodSlonca,
-                        Zachod_Slonca = Bydgoszcz.zachodSlonca,
-                        Temperatura_Minimalna = Bydgoszcz.tempMin,
-                        Temperatura_Aktualna = Bydgoszcz.temp,
-                        Temperatura_Maksymalna = Bydgoszcz.tempMax,
-                        Temperatura_Odczuwalna = Bydgoszcz.tempOdczuwalna,
-                        Temperatura_OdczuwalnaMin = Bydgoszcz.tempOdczuwalnaMin,
-                        Temperatura_OdczuwalnaMax = Bydgoszcz.tempOdczuwalnaMax,
-                        WilgotnoscProc = Bydgoszcz.wilgotnosc,
-                        Szansa_Wystapienia_OpadowProc = Bydgoszcz.szansaWystapieniaOpadow,
-                        ZachmurzenieProc = Bydgoszcz.zachmurzenie,
-                        Predkosc_Wiatru_kmh = Bydgoszcz.predkoscWiatru,
-                        Kierunek_Wiatru = Bydgoszcz.kierunekWiatru,
-                        Cisnienie_Atmosferyczne = Bydgoszcz.cisnienie
+                        Wschod_Slonca = PanelAdministracyjny.wschodSlonca,
+                        Zachod_Slonca = PanelAdministracyjny.zachodSlonca,
+                        Temperatura_Minimalna = PanelAdministracyjny.tempMin,
+                        Temperatura_Aktualna = PanelAdministracyjny.temp,
+                        Temperatura_Maksymalna = PanelAdministracyjny.tempMax,
+                        Temperatura_Odczuwalna = PanelAdministracyjny.tempOdczuwalna,
+                        Temperatura_OdczuwalnaMin = PanelAdministracyjny.tempOdczuwalnaMin,
+                        Temperatura_OdczuwalnaMax = PanelAdministracyjny.tempOdczuwalnaMax,
+                        WilgotnoscProc = PanelAdministracyjny.wilgotnosc,
+                        Szansa_Wystapienia_OpadowProc = PanelAdministracyjny.szansaWystapieniaOpadow,
+                        ZachmurzenieProc = PanelAdministracyjny.zachmurzenie,
+                        Predkosc_Wiatru_kmh = PanelAdministracyjny.predkoscWiatru,
+                        Kierunek_Wiatru = PanelAdministracyjny.kierunekWiatru,
+                        Cisnienie_Atmosferyczne = PanelAdministracyjny.cisnienie
+                    });
+                }
+                Poprawka(filePath);
+
+                Kalibracja.CzytajKalibracje("Bydgoszcz");
+
+
+
+
+
+
+            }
+            else if (i == 11)
+            {
+                string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Egipt");
+                Directory.CreateDirectory(dirPath);
+
+                string filePath = Path.Combine(dirPath, $"{data.ToShortDateString()}.xml");
+
+                if (data != DateTime.Today && !File.Exists(filePath))
+                {
+                    PanelAdministracyjny.tempMin = 0;
+                    PanelAdministracyjny.temp = 0;
+                    PanelAdministracyjny.tempMax = 0;
+                    PanelAdministracyjny.tempOdczuwalna = 0;
+                    PanelAdministracyjny.tempOdczuwalnaMin = 0;
+                    PanelAdministracyjny.tempOdczuwalnaMax = 0;
+                    PanelAdministracyjny.wilgotnosc = 0;
+                    PanelAdministracyjny.szansaWystapieniaOpadow = 0;
+                    PanelAdministracyjny.zachmurzenie = 0;
+                    PanelAdministracyjny.predkoscWiatru = 0;
+                    PanelAdministracyjny.kierunekWiatru = 0;
+                    PanelAdministracyjny.cisnienie = 0;
+                    PanelAdministracyjny.wschodSlonca = data;
+                    PanelAdministracyjny.zachodSlonca = data;
+                }
+                using (var writer = new StreamWriter(filePath))
+                {
+                    var serializer = new XmlSerializer(typeof(DataTemplate));
+                    serializer.Serialize(writer, new DataTemplate
+                    {
+                        Miejsce = "Egipt",
+                        Data = data,
+                        Wschod_Slonca = PanelAdministracyjny.wschodSlonca,
+                        Zachod_Slonca = PanelAdministracyjny.zachodSlonca,
+                        Temperatura_Minimalna = PanelAdministracyjny.tempMin,
+                        Temperatura_Aktualna = PanelAdministracyjny.temp,
+                        Temperatura_Maksymalna = PanelAdministracyjny.tempMax,
+                        Temperatura_Odczuwalna = PanelAdministracyjny.tempOdczuwalna,
+                        Temperatura_OdczuwalnaMin = PanelAdministracyjny.tempOdczuwalnaMin,
+                        Temperatura_OdczuwalnaMax = PanelAdministracyjny.tempOdczuwalnaMax,
+                        WilgotnoscProc = PanelAdministracyjny.wilgotnosc,
+                        Szansa_Wystapienia_OpadowProc = PanelAdministracyjny.szansaWystapieniaOpadow,
+                        ZachmurzenieProc = PanelAdministracyjny.zachmurzenie,
+                        Predkosc_Wiatru_kmh = PanelAdministracyjny.predkoscWiatru,
+                        Kierunek_Wiatru = PanelAdministracyjny.kierunekWiatru,
+                        Cisnienie_Atmosferyczne = PanelAdministracyjny.cisnienie
                     });
                 }
 
                 Poprawka(filePath);
-            }
-            else if (i == 11)
-            {
+
+                Kalibracja.CzytajKalibracje("Egipt");
 
             }
             else if (i == 12)
             {
+                string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Grenlandia");
+                Directory.CreateDirectory(dirPath);
+
+                string filePath = Path.Combine(dirPath, $"{data.ToShortDateString()}.xml");
+
+
+                if (data != DateTime.Today && !File.Exists(filePath))
+                {
+                    PanelAdministracyjny.tempMin = 0;
+                    PanelAdministracyjny.temp = 0;
+                    PanelAdministracyjny.tempMax = 0;
+                    PanelAdministracyjny.tempOdczuwalna = 0;
+                    PanelAdministracyjny.tempOdczuwalnaMin = 0;
+                    PanelAdministracyjny.tempOdczuwalnaMax = 0;
+                    PanelAdministracyjny.wilgotnosc = 0;
+                    PanelAdministracyjny.szansaWystapieniaOpadow = 0;
+                    PanelAdministracyjny.zachmurzenie = 0;
+                    PanelAdministracyjny.predkoscWiatru = 0;
+                    PanelAdministracyjny.kierunekWiatru = 0;
+                    PanelAdministracyjny.cisnienie = 0;
+                    PanelAdministracyjny.wschodSlonca = data;
+                    PanelAdministracyjny.zachodSlonca = data;
+                }
+                using (var writer = new StreamWriter(filePath))
+                {
+                    var serializer = new XmlSerializer(typeof(DataTemplate));
+                    serializer.Serialize(writer, new DataTemplate
+                    {
+                        Miejsce = "Grenlandia",
+                        Data = data,
+                        Wschod_Slonca = PanelAdministracyjny.wschodSlonca,
+                        Zachod_Slonca = PanelAdministracyjny.zachodSlonca,
+                        Temperatura_Minimalna = PanelAdministracyjny.tempMin,
+                        Temperatura_Aktualna = PanelAdministracyjny.temp,
+                        Temperatura_Maksymalna = PanelAdministracyjny.tempMax,
+                        Temperatura_Odczuwalna = PanelAdministracyjny.tempOdczuwalna,
+                        Temperatura_OdczuwalnaMin = PanelAdministracyjny.tempOdczuwalnaMin,
+                        Temperatura_OdczuwalnaMax = PanelAdministracyjny.tempOdczuwalnaMax,
+                        WilgotnoscProc = PanelAdministracyjny.wilgotnosc,
+                        Szansa_Wystapienia_OpadowProc = PanelAdministracyjny.szansaWystapieniaOpadow,
+                        ZachmurzenieProc = PanelAdministracyjny.zachmurzenie,
+                        Predkosc_Wiatru_kmh = PanelAdministracyjny.predkoscWiatru,
+                        Kierunek_Wiatru = PanelAdministracyjny.kierunekWiatru,
+                        Cisnienie_Atmosferyczne = PanelAdministracyjny.cisnienie
+                    });
+                }
+
+                Poprawka(filePath);
+
+                Kalibracja.CzytajKalibracje("Grenlandia");
+
 
             }
 
@@ -333,6 +440,9 @@ namespace miniStacjaPogody
             doc.Load(nazwa);
 
             XmlElement root = doc.DocumentElement;
+
+
+
 
             foreach (XmlNode node in root.ChildNodes)
             {

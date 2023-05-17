@@ -21,10 +21,16 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DatePicker x:Name="DatePick" Margin="10,10,490,0" VerticalAlignment="Top" SelectedDateChanged="DatePick_SelectedDateChanged"/>
-        <Button x:Name="Szukaj" Content="Szukaj" HorizontalAlignment="Left" Margin="490,10,10,0" VerticalAlignment="Top" Click="Szukaj_Click" Width="300"/>
-        <Button x:Name="Edytuj" Content="Edytuj" HorizontalAlignment="Left" Margin="490,10,10,0" VerticalAlignment="Top" Click="Edytuj_Click" Width="300" Grid.Row="1" IsEnabled="False"/>
-        <ComboBox x:Name="wybor" VerticalAlignment="Top" Margin="340,10,340,0" IsReadOnly="True" SelectionChanged="ComboBox_SelectionChanged"/>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+
+
+
+        <Button x:Name="Edytuj" Content="Edytuj" HorizontalAlignment="Left" Margin="490,10,10,0" VerticalAlignment="Top" Click="Edytuj_Click" Width="300" Grid.ColumnSpan="2"/>
+        <ComboBox x:Name="wybor" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="100" Grid.ColumnSpan="2" IsReadOnly="True" SelectionChanged="ComboBox_SelectionChanged"/>
 
         <TextBlock x:Name="LokiData" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Left" MaxWidth="400"/>
         <TextBlock x:Name="txtBlockData" VerticalAlignment="Center" Grid.Row="2" Foreground="White" FontSize="15"/>
@@ -35,56 +41,21 @@
         <TextBlock x:Name="Wiat" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="7"/>
         <TextBlock x:Name="txtBlockWiatr" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="8" Foreground="White" FontSize="15" MaxWidth="400"/>
 
+        <TextBlock x:Name="operacja" Grid.Row="9" VerticalAlignment="Top" TextAlignment="Center" FontSize="24" Grid.ColumnSpan="2"/>
+        <Button Click="powrot" Content="Powrot" Grid.Row="9" Width="200" Height="50" Margin="0,0,300,0" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+        <Button x:Name="savebtn" Click="save" Content="Zapisz" Grid.Row="9" Width="200" Height="50" Margin="300,0,0,0" VerticalAlignment="Bottom" IsEnabled="False" Grid.ColumnSpan="2"/>
 
-
-        <ComboBox x:Name="HourPick" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="200,44,0,0" Width="50" Grid.Row="2" IsReadOnly="True" Grid.RowSpan="2"/>
-        <ComboBox x:Name="HourPick2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="200,22,0,0" Width="50" Grid.Row="2" IsReadOnly="True" Grid.RowSpan="2"/>
-        <TextBlock x:Name="txtblock1" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="255,11,0,0" Grid.Row="2"/>
-        <TextBlock x:Name="txtblock2" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="255,33,0,0" Grid.Row="2" Grid.RowSpan="2"/>
-        <ComboBox x:Name="MinPick" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="265,21,0,0" Width="50" Grid.Row="2" IsReadOnly="True" Grid.RowSpan="2"/>
-        <ComboBox x:Name="MinPick2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="265,44,0,0" Width="50" Grid.Row="2" IsReadOnly="True" Grid.RowSpan="2"/>
-        <TextBlock x:Name="txtBlock3" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="320,11,0,0" Grid.Row="2"/>
-        <TextBlock x:Name="txtBlock4" Text=":" Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="320,33,0,0" Grid.Row="2" Grid.RowSpan="2"/>
-        <ComboBox x:Name="SecPick" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="330,22,0,0" Width="50" Grid.Row="2" IsReadOnly="True" Grid.RowSpan="2"/>
-        <ComboBox x:Name="SecPick2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="330,44,0,0" Width="50" Grid.Row="2" IsReadOnly="True" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CtempMin1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="240,31,0,0" Width="50" Grid.Row="3" IsReadOnly="True" Grid.RowSpan="2"/>
-        <TextBlock x:Name="txtblock5" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="296,26,0,0" Grid.Row="3" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CtempMin2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="310,31,0,0" Width="50" Grid.Row="3" IsReadOnly="True" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CtempMax1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="240,20,0,0" Width="50" Grid.Row="4" IsReadOnly="True"/>
-        <TextBlock x:Name="txtblock6" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="296,14,0,0" Grid.Row="4"/>
-        <ComboBox x:Name="CtempMax2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="310,20,0,0" Width="50" Grid.Row="4" IsReadOnly="True"/>
-        <ComboBox x:Name="CtempAktualna1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="240,41,0,0" Width="50" Grid.Row="4" IsReadOnly="True"/>
-        <TextBlock x:Name="txtblock7" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="296,36,0,0" Grid.Row="4"/>
-        <ComboBox x:Name="CtempAktualna2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="310,41,0,0" Width="50" Grid.Row="4" IsReadOnly="True"/>
-        <ComboBox x:Name="CtempOMin1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="330,64,0,0" Width="50" Grid.Row="4"/>
-        <TextBlock x:Name="txtblock8" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="388,59,0,0" Grid.Row="4"/>
-        <ComboBox x:Name="CtempOMin2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="400,64,0,0" Width="50" Grid.Row="4"/>
-        <ComboBox x:Name="CtempOMax1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="330,84,0,0" Width="50" Grid.Row="4"/>
-        <TextBlock x:Name="txtblock9" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="388,79,0,0" Grid.Row="4"/>
-        <ComboBox x:Name="CtempOMax2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="400,84,0,0" Width="50" Grid.Row="4"/>
-        <ComboBox x:Name="CtempOAkt1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="330,104,0,0" Width="50" Grid.Row="4" Grid.RowSpan="2"/>
-        <TextBlock x:Name="txtblock10" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="388,99,0,0" Grid.Row="4" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CtempOAkt2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="400,104,0,0" Width="50" Grid.Row="4" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CWilg1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="155,0,0,0" Width="50" Grid.Row="6" Grid.RowSpan="2"/>
-        <TextBlock x:Name="txtblock11" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="212,-10,0,0" Grid.Row="6" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CWilg2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="225,0,0,0" Width="50" Grid.Row="6" Grid.RowSpan="2"/>
-        <ComboBox x:Name="COpad1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="285,20,0,0" Width="50" Grid.Row="6"/>
+        <TextBlock x:Name="txtWartosc" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" FontSize="24" TextAlignment="Center"/>
+        <Button x:Name="btnPlusZeroOne" Content="+0,01" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0" Grid.Row="4" Width="50" Grid.Column="1"/>
+        <Button x:Name="btnMinusOne" Content="-0,1" HorizontalAlignment="Center" Margin="0,0,0,25" Grid.Row="4" VerticalAlignment="Bottom" Width="50" Grid.Column="1"/>
+        <Button x:Name="btnPlusOne" Content="+0,1" HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="4" VerticalAlignment="Top" Width="50" Grid.Column="1"/>
+        <Button x:Name="btnMinusZeroOne" Content="-0,01" HorizontalAlignment="Right" Margin="0,0,25,0" Grid.Row="4" VerticalAlignment="Center" Width="50" Grid.Column="1"/>
 
 
 
 
-        <TextBlock x:Name="operacja" Grid.Row="9" VerticalAlignment="Top" TextAlignment="Center" FontSize="24"/>
-        <Button Click="powrot" Content="Powrot" Grid.Row="9" Width="200" Height="50" Margin="0,0,300,0" VerticalAlignment="Bottom"/>
-        <Button x:Name="savebtn" Click="save" Content="Zapisz" Grid.Row="9" Width="200" Height="50" Margin="300,0,0,0" VerticalAlignment="Bottom" IsEnabled="False"/>
-        <TextBlock x:Name="txtblock12" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="340,15,0,0" Grid.Row="6" Grid.RowSpan="2"/>
-        <ComboBox x:Name="COpad2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="350,21,0,0" Width="50" Grid.Row="6" Grid.RowSpan="2"/>
-        <ComboBox x:Name="CZach1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="155,42,0,0" Width="50" Grid.Row="6"/>
-        <TextBlock x:Name="txtblock13" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="212,35,0,0" Grid.Row="6"/>
-        <ComboBox x:Name="CZach2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="225,42,0,0" Width="50" Grid.Row="6"/>
-        <ComboBox x:Name="CCis" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="230,63,0,0" Width="100" Grid.Row="6"/>
-        <ComboBox x:Name="CPre1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="200,0,0,0" Width="50" Grid.Row="8"/>
-        <TextBlock x:Name="txtblock14" Text="," Foreground="AliceBlue" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="252,0,0,0" Grid.Row="8"/>
-        <ComboBox x:Name="CPre2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="260,0,0,0" Width="50" Grid.Row="8"/>
-        <ComboBox x:Name="CKie" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="150,25,0,0" Width="75" Grid.Row="8"/>
+
+
+
     </Grid>
 </Page>
