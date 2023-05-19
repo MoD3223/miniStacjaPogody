@@ -50,8 +50,26 @@ namespace miniStacjaPogody
         public static string data;
         public Timer _timer;
         public static double KalibracjaDouble;
-        public static string KalibracjaString;
+        public static string KalibracjaString; //Potrzebne??
         public static bool odkryty = false;
+
+
+
+
+
+
+        public static double KalibracjaTemperatura;
+        public static double KalibracjaTemperaturaOdczuwalna;
+        public static double KalibracjaWilgotnoscProc;
+        public static double KalibracjaSzansaWystapieniaOpadowProc;
+        public static double KalibracjaZachmurzenieProc;
+        public static double KalibracjaPredkoscWiatru;
+        public static int KalibracjaKierunekWiatru;
+        public static int KalibracjaCisnienie;
+
+
+
+
 
 
         //Ogolnie mamy zmieniac kalibracje o np +0.1 i ma to zapisywac ogolnie do pliku, ma tez pokazywac o ile skalibrowane na panelu sterowania, na glownym juz po poprawce
@@ -66,15 +84,32 @@ namespace miniStacjaPogody
             wybor.ItemsSource = list;
             wybor.SelectedIndex = 0;
             _timer = new Timer(Update, null, TimeSpan.Zero, TimeSpan.FromSeconds(5));
+            try
+            {
+                CzytajKalibracje(WyborNaStringa());
+            }
+            catch (Exception)
+            {
+                Kalibracja.ZapiszKalibracje(WyborNaStringa());
+                CzytajKalibracje(WyborNaStringa());
+            }
+            txtWartosc.Text = KalibracjaDouble.ToString();
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selected = wybor.SelectedItem.ToString();
             Szukaj_Click(this, e);
-            if (odkryty)
+            KalibracjaDouble = 0;
+            txtWartosc.Text = KalibracjaDouble.ToString();
+            try
             {
-                Kalibracja.CzytajKalibracje(WyborNaStringa());
+                CzytajKalibracje(WyborNaStringa());
+            }
+            catch (Exception)
+            {
+                Kalibracja.ZapiszKalibracje(WyborNaStringa());
+                CzytajKalibracje(WyborNaStringa());
             }
         }
 
@@ -148,7 +183,7 @@ namespace miniStacjaPogody
 
         private void save(object sender, RoutedEventArgs e)
         {
-        
+            Kalibracja.ZapiszKalibracje(WyborNaStringa());
             if (wybor.SelectedIndex == 0)
             {
                 DataTemplate.Zapisz(10, selectedDate);
@@ -190,5 +225,56 @@ namespace miniStacjaPogody
                 return "Grenlandia";
             }
         }
+
+        private void btnPlusZeroOne_Click(object sender, RoutedEventArgs e)
+        {
+            KalibracjaDouble += 0.01;
+            KalibracjaDouble = Math.Round(KalibracjaDouble, 2);
+            txtWartosc.Text = KalibracjaDouble.ToString();
+
+        }
+
+        private void btnMinusOne_Click(object sender, RoutedEventArgs e)
+        {
+            KalibracjaDouble -= 0.1;
+            KalibracjaDouble = Math.Round(KalibracjaDouble, 2);
+            txtWartosc.Text = KalibracjaDouble.ToString();
+        }
+
+        private void btnPlusOne_Click(object sender, RoutedEventArgs e)
+        {
+            KalibracjaDouble += 0.1;
+            KalibracjaDouble = Math.Round(KalibracjaDouble, 2); ;
+            txtWartosc.Text = KalibracjaDouble.ToString();
+        }
+
+        private void btnMinusZeroOne_Click(object sender, RoutedEventArgs e)
+        {
+            KalibracjaDouble -= 0.01;
+            KalibracjaDouble = Math.Round(KalibracjaDouble, 2);
+            txtWartosc.Text = KalibracjaDouble.ToString();
+        }
+
+
+
+
+        private void CzytajKalibracje(string lokacja)
+        {
+            string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, lokacja, "Kalibracja.xml");
+            XmlDocument doc = new XmlDocument();
+            doc.Load(dirPath);
+            XmlNode root = doc.SelectSingleNode("/Kalibracja");
+            //tempMin = Double.Parse(root.SelectSingleNode("Temperatura_Minimalna").InnerText);
+            KalibracjaTemperatura = Double.Parse(root.SelectSingleNode("KalibracjaTemperatura").InnerText);
+            KalibracjaTemperaturaOdczuwalna = Double.Parse(root.SelectSingleNode("KalibracjaTemperaturaOdczuwalna").InnerText);
+            KalibracjaWilgotnoscProc = Double.Parse(root.SelectSingleNode("KalibracjaWilgotnoscProc").InnerText);
+            KalibracjaSzansaWystapieniaOpadowProc = Double.Parse(root.SelectSingleNode("KalibracjaSzansaWystapieniaOpadowProc").InnerText);
+            KalibracjaZachmurzenieProc = Double.Parse(root.SelectSingleNode("KalibracjaZachmurzenieProc").InnerText);
+            KalibracjaPredkoscWiatru = Double.Parse(root.SelectSingleNode("KalibracjaPredkoscWiatru").InnerText);
+            KalibracjaKierunekWiatru = Int32.Parse(root.SelectSingleNode("KalibracjaKierunekWiatru").InnerText);
+            KalibracjaCisnienie = Int32.Parse(root.SelectSingleNode("KalibracjaCisnienie").InnerText);
+        }
+
+
     }
 }

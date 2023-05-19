@@ -10,18 +10,18 @@ using System.Xml.Serialization;
 
 namespace miniStacjaPogody
 {
-    internal class Kalibracja
+    public class Kalibracja
     {
-        public static double KalibracjaTemperatura;
-        public static double KalibracjaTemperaturaOdczuwalna;
-        public static double KalibracjaWilgotnoscProc;
-        public static double KalibracjaSzansaWystapieniaOpadowProc;
-        public static double KalibracjaZachmurzenieProc;
-        public static double KalibracjaPredkoscWiatru;
-        public static int KalibracjaKierunekWiatru;
-        public static int KalibracjaCisnienie;
+        public double KalibracjaTemperatura { get; set; }
+        public double KalibracjaTemperaturaOdczuwalna { get; set; }
+        public double KalibracjaWilgotnoscProc { get; set; }
+        public double KalibracjaSzansaWystapieniaOpadowProc { get; set; }
+        public double KalibracjaZachmurzenieProc { get; set; }
+        public double KalibracjaPredkoscWiatru { get; set; }
+        public int KalibracjaKierunekWiatru { get; set; }
+        public int KalibracjaCisnienie { get; set; }
 
-        public static void CzytajKalibracje(string lokacja)
+        public static void ZapiszKalibracje(string lokacja)
         {
             string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, lokacja, "Kalibracja.xml");
 
@@ -29,19 +29,23 @@ namespace miniStacjaPogody
             {
                 using (var writer = new StreamWriter(dirPath))
                 {
+
                     var serializer = new XmlSerializer(typeof(Kalibracja));
                     serializer.Serialize(writer, new Kalibracja
                     {
-                        
+                        KalibracjaTemperatura = 0,
+                        KalibracjaTemperaturaOdczuwalna = 0,
+                        KalibracjaWilgotnoscProc = 0,
+                        KalibracjaSzansaWystapieniaOpadowProc = 0,
+                        KalibracjaZachmurzenieProc = 0,
+                        KalibracjaPredkoscWiatru = 0,
+                        KalibracjaKierunekWiatru = 0,
+                        KalibracjaCisnienie = 0
                     });
                 }
                 DataTemplate.Poprawka(dirPath);
             }
-                XmlDocument doc = new XmlDocument();
-                doc.Load(dirPath);
-                XmlNode root = doc.SelectSingleNode("/DataTemplate");
-            //tempMin = Double.Parse(root.SelectSingleNode("Temperatura_Minimalna").InnerText);
-            KalibracjaTemperatura = Double.Parse(root.SelectSingleNode("KalibracjaTemperatura").InnerText);
+                
 
         }
 

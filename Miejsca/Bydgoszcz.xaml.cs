@@ -44,6 +44,37 @@ namespace miniStacjaPogody
         public static DateTime zachodSlonca;
         public static DateTime dzisiaj = DateTime.Today;
         static bool losuj = true;
+
+
+
+
+
+        public static double KalibracjaTemperatura { get; set; }
+        public static double KalibracjaTemperaturaOdczuwalna { get; set; }
+        public static double KalibracjaWilgotnoscProc { get; set; }
+        public static double KalibracjaSzansaWystapieniaOpadowProc { get; set; }
+        public static double KalibracjaZachmurzenieProc { get; set; }
+        public static double KalibracjaPredkoscWiatru { get; set; }
+        public static int KalibracjaKierunekWiatru { get; set; }
+        public static int KalibracjaCisnienie { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public Bydgoszcz()
         {
             InitializeComponent();
@@ -56,9 +87,21 @@ namespace miniStacjaPogody
             {
                 Laduj();
             }
-            Kalibracja.CzytajKalibracje("Bydgoszcz");
+
+            try
+            {
+                CzytajKalibracje();
+            }
+            catch (Exception)
+            {
+                Kalibracja.ZapiszKalibracje("Bydgoszcz");
+                CzytajKalibracje();
+            }
+
+
+
             bydData.Text = $"Bydgoszcz {dzisiaj.ToShortDateString()}\nWschod Slonca: {wschodSlonca.ToString("HH:mm:ss")}\nZachod Slonca: {zachodSlonca.ToString("HH:mm:ss")}";
-            bydOpady.Text = $"Wilgotnosc: {(wilgotnosc + Kalibracja.KalibracjaWilgotnoscProc):F1}%\nSzansa wystapienia opadow: {(szansaWystapieniaOpadow + Kalibracja.KalibracjaSzansaWystapieniaOpadowProc):F1}%\nZachmurzenie: {(zachmurzenie + Kalibracja.KalibracjaZachmurzenieProc):F1}%\nCisnienie atmosferyzcne: {cisnienie + Kalibracja.KalibracjaCisnienie}hpa";
+            bydOpady.Text = $"Wilgotnosc: {(wilgotnosc + KalibracjaWilgotnoscProc):F1}%\nSzansa wystapienia opadow: {(szansaWystapieniaOpadow + KalibracjaSzansaWystapieniaOpadowProc):F1}%\nZachmurzenie: {(zachmurzenie + KalibracjaZachmurzenieProc):F1}%\nCisnienie atmosferyzcne: {cisnienie + KalibracjaCisnienie}hpa";
             _timer = new Timer(Update, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
@@ -163,8 +206,8 @@ namespace miniStacjaPogody
 
         private void AktualizujTekst()
         {
-            bydTemp.Text = $"Temperatura minimalna: {(tempMin + Kalibracja.KalibracjaTemperatura):F1}°C\nTemperatura maksymalna: {(tempMax + Kalibracja.KalibracjaTemperatura):F1}°C\nTemperatura aktualna: {(temp + Kalibracja.KalibracjaTemperatura):F1}°C\n\nTemperatura odczuwalna minimalna: {(tempOdczuwalnaMin + Kalibracja.KalibracjaTemperaturaOdczuwalna):F1}°C\nTemperatura odczuwalna maksymalna: {(tempOdczuwalnaMax + Kalibracja.KalibracjaTemperaturaOdczuwalna):F1}°C\nTemperatura odczuwalna aktualna: {(tempOdczuwalna + Kalibracja.KalibracjaTemperaturaOdczuwalna):F1}°C";
-            bydWiatr.Text = $"Predkosc wiatru: {(predkoscWiatru + Kalibracja.KalibracjaPredkoscWiatru):F1}km/h\nKierunek wiatru: {(kierunekWiatru + Kalibracja.KalibracjaKierunekWiatru)}°";
+            bydTemp.Text = $"Temperatura minimalna: {(tempMin + KalibracjaTemperatura):F1}°C\nTemperatura maksymalna: {(tempMax + KalibracjaTemperatura):F1}°C\nTemperatura aktualna: {(temp + KalibracjaTemperatura):F1}°C\n\nTemperatura odczuwalna minimalna: {(tempOdczuwalnaMin + KalibracjaTemperaturaOdczuwalna):F1}°C\nTemperatura odczuwalna maksymalna: {(tempOdczuwalnaMax + KalibracjaTemperaturaOdczuwalna):F1}°C\nTemperatura odczuwalna aktualna: {(tempOdczuwalna + KalibracjaTemperaturaOdczuwalna):F1}°C";
+            bydWiatr.Text = $"Predkosc wiatru: {(predkoscWiatru + KalibracjaPredkoscWiatru):F1}km/h\nKierunek wiatru: {(kierunekWiatru + KalibracjaKierunekWiatru)}°";
         }
 
 
@@ -184,5 +227,35 @@ namespace miniStacjaPogody
             MainWindow.navPanelAdministracyjny();
             _timer.Dispose();
         }
+
+
+
+
+
+        private void CzytajKalibracje()
+        {
+            string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bydgoszcz", "Kalibracja.xml");
+            XmlDocument doc = new XmlDocument();
+            doc.Load(dirPath);
+            XmlNode root = doc.SelectSingleNode("/Kalibracja");
+            //tempMin = Double.Parse(root.SelectSingleNode("Temperatura_Minimalna").InnerText);
+            KalibracjaTemperatura = Double.Parse(root.SelectSingleNode("KalibracjaTemperatura").InnerText);
+            KalibracjaTemperaturaOdczuwalna = Double.Parse(root.SelectSingleNode("KalibracjaTemperaturaOdczuwalna").InnerText);
+            KalibracjaWilgotnoscProc = Double.Parse(root.SelectSingleNode("KalibracjaWilgotnoscProc").InnerText);
+            KalibracjaSzansaWystapieniaOpadowProc = Double.Parse(root.SelectSingleNode("KalibracjaSzansaWystapieniaOpadowProc").InnerText);
+            KalibracjaZachmurzenieProc = Double.Parse(root.SelectSingleNode("KalibracjaZachmurzenieProc").InnerText);
+            KalibracjaPredkoscWiatru = Double.Parse(root.SelectSingleNode("KalibracjaPredkoscWiatru").InnerText);
+            KalibracjaKierunekWiatru = Int32.Parse(root.SelectSingleNode("KalibracjaKierunekWiatru").InnerText);
+            KalibracjaCisnienie = Int32.Parse(root.SelectSingleNode("KalibracjaCisnienie").InnerText);
+        }
+
+
+
+
+
+
+
+
+
     }
 }

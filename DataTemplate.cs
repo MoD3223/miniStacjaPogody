@@ -309,7 +309,7 @@ namespace miniStacjaPogody
                 }
                 Poprawka(filePath);
 
-                Kalibracja.CzytajKalibracje("Bydgoszcz");
+                Kalibracja.ZapiszKalibracje("Bydgoszcz");
 
 
 
@@ -367,7 +367,7 @@ namespace miniStacjaPogody
 
                 Poprawka(filePath);
 
-                Kalibracja.CzytajKalibracje("Egipt");
+                Kalibracja.ZapiszKalibracje("Egipt");
 
             }
             else if (i == 12)
@@ -421,7 +421,7 @@ namespace miniStacjaPogody
 
                 Poprawka(filePath);
 
-                Kalibracja.CzytajKalibracje("Grenlandia");
+                Kalibracja.ZapiszKalibracje("Grenlandia");
 
 
             }
@@ -440,9 +440,6 @@ namespace miniStacjaPogody
             doc.Load(nazwa);
 
             XmlElement root = doc.DocumentElement;
-
-
-
 
             foreach (XmlNode node in root.ChildNodes)
             {

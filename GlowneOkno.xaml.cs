@@ -23,6 +23,7 @@ namespace miniStacjaPogody
         public GlowneOkno()
         {
             InitializeComponent();
+            
         }
 
         private void btnByd_Click(object sender, RoutedEventArgs e)
