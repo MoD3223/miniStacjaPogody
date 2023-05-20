@@ -77,7 +77,7 @@ namespace miniStacjaPogody
             }
             catch (Exception)
             {
-                Kalibracja.ZapiszKalibracje("Egipt");
+                Kalibracja.ZapiszKalibracje("Egipt", 0, 0);
                 CzytajKalibracje();
             }
 
@@ -218,7 +218,7 @@ namespace miniStacjaPogody
             string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Egipt", "Kalibracja.xml");
             XmlDocument doc = new XmlDocument();
             doc.Load(dirPath);
-            XmlNode root = doc.SelectSingleNode("/DataTemplate");
+            XmlNode root = doc.SelectSingleNode("/Kalibracja");
             //tempMin = Double.Parse(root.SelectSingleNode("Temperatura_Minimalna").InnerText);
             KalibracjaTemperatura = Double.Parse(root.SelectSingleNode("KalibracjaTemperatura").InnerText);
             KalibracjaTemperaturaOdczuwalna = Double.Parse(root.SelectSingleNode("KalibracjaTemperaturaOdczuwalna").InnerText);

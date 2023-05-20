@@ -94,7 +94,7 @@ namespace miniStacjaPogody
             }
             catch (Exception)
             {
-                Kalibracja.ZapiszKalibracje("Bydgoszcz");
+                Kalibracja.ZapiszKalibracje("Bydgoszcz", 0, 0);
                 CzytajKalibracje();
             }
 

@@ -309,11 +309,6 @@ namespace miniStacjaPogody
                 }
                 Poprawka(filePath);
 
-                Kalibracja.ZapiszKalibracje("Bydgoszcz");
-
-
-
-
 
 
             }
@@ -367,8 +362,6 @@ namespace miniStacjaPogody
 
                 Poprawka(filePath);
 
-                Kalibracja.ZapiszKalibracje("Egipt");
-
             }
             else if (i == 12)
             {
@@ -420,8 +413,6 @@ namespace miniStacjaPogody
                 }
 
                 Poprawka(filePath);
-
-                Kalibracja.ZapiszKalibracje("Grenlandia");
 
 
             }

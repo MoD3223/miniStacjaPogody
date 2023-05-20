@@ -90,7 +90,7 @@ namespace miniStacjaPogody
             }
             catch (Exception)
             {
-                Kalibracja.ZapiszKalibracje(WyborNaStringa());
+                Kalibracja.ZapiszKalibracje(WyborNaStringa(),0,0);
                 CzytajKalibracje(WyborNaStringa());
             }
             txtWartosc.Text = KalibracjaDouble.ToString();
@@ -108,7 +108,7 @@ namespace miniStacjaPogody
             }
             catch (Exception)
             {
-                Kalibracja.ZapiszKalibracje(WyborNaStringa());
+                Kalibracja.ZapiszKalibracje(WyborNaStringa(), 0, 0);
                 CzytajKalibracje(WyborNaStringa());
             }
         }
@@ -131,10 +131,7 @@ namespace miniStacjaPogody
 
 
             LokiData.Text = "Lokalizacja i data";
-            Temperatur.Text = "Temperatura";
-            Opad.Text = "Opady";
-            Wiat.Text = "Wiatr";
-            txtBlockData.Text = $"Bydgoszcz {selectedDate.ToShortDateString()}\nWschod Slonca: {wschodSlonca.ToString("HH:mm:ss")}\nZachod Slonca: {zachodSlonca.ToString("HH:mm:ss")}";
+            txtBlockData.Text = $"{wybor.SelectedValue.ToString()} {selectedDate.ToShortDateString()}\nWschod Slonca: {wschodSlonca.ToString("HH:mm:ss")}\nZachod Slonca: {zachodSlonca.ToString("HH:mm:ss")}";
             txtBlockOpady.Text = $"Wilgotnosc: {wilgotnosc:F1}%\nSzansa wystapienia opadow: {szansaWystapieniaOpadow:F1}%\nZachmurzenie: {zachmurzenie:F1}%\nCisnienie atmosferyzcne: {cisnienie}hpa";
             txtBlockTemp.Text = $"Temperatura minimalna: {tempMin:F1}°C\nTemperatura maksymalna: {tempMax:F1}°C\nTemperatura aktualna: {temp:F1}°C\nTemperatura odczuwalna minimalna: {tempOdczuwalnaMin:F1}°C\nTemperatura odczuwalna maksymalna: {tempOdczuwalnaMax:F1}°C\nTemperatura odczuwalna aktualna: {tempOdczuwalna:F1}°C";
             txtBlockWiatr.Text = $"Predkosc wiatru: {predkoscWiatru:F1}km/h\nKierunek wiatru: {kierunekWiatru}°";
@@ -183,7 +180,7 @@ namespace miniStacjaPogody
 
         private void save(object sender, RoutedEventArgs e)
         {
-            Kalibracja.ZapiszKalibracje(WyborNaStringa());
+            Kalibracja.ZapiszKalibracje(WyborNaStringa(),wybrano,Double.Parse(txtWartosc.Text));
             if (wybor.SelectedIndex == 0)
             {
                 DataTemplate.Zapisz(10, selectedDate);
@@ -202,12 +199,16 @@ namespace miniStacjaPogody
                 operacja.Text = "Zapisano plik!";
                 operacja.Foreground = Brushes.Green;
             }
+            CzytajKalibracje(WyborNaStringa());
         }
 
         private void Edytuj_Click(object sender, RoutedEventArgs e)
         {
             savebtn.IsEnabled = true;
             odkryty = true;
+            rdTemp.Visibility = Visibility.Visible;
+            rdOpad.Visibility = Visibility.Visible;
+            rdWiat.Visibility = Visibility.Visible;
         }
         
         private string WyborNaStringa()
@@ -275,6 +276,44 @@ namespace miniStacjaPogody
             KalibracjaCisnienie = Int32.Parse(root.SelectSingleNode("KalibracjaCisnienie").InnerText);
         }
 
+        private void rdTemp_Click(object sender, RoutedEventArgs e)
+        {
+            btnPlusZeroOne.Visibility = Visibility.Visible;
+            btnMinusZeroOne.Visibility = Visibility.Visible;
+            btnPlusOne.Visibility = Visibility.Visible;
+            btnMinusOne.Visibility = Visibility.Visible;
+            txtWartosc.Visibility = Visibility.Visible;
 
+            KalibracjaDouble = KalibracjaTemperatura;
+            txtWartosc.Text = KalibracjaDouble.ToString();
+
+
+            wybrano = 1;
+        }
+
+        private void rdOpad_Click(object sender, RoutedEventArgs e)
+        {
+            btnPlusZeroOne.Visibility = Visibility.Visible;
+            btnMinusZeroOne.Visibility = Visibility.Visible;
+            btnPlusOne.Visibility = Visibility.Visible;
+            btnMinusOne.Visibility = Visibility.Visible;
+            txtWartosc.Visibility = Visibility.Visible;
+
+            KalibracjaDouble = KalibracjaSzansaWystapieniaOpadowProc;
+            txtWartosc.Text = KalibracjaDouble.ToString();
+            wybrano = 2;
+        }
+
+        private void rdWiat_Click(object sender, RoutedEventArgs e)
+        {
+            btnPlusZeroOne.Visibility = Visibility.Visible;
+            btnMinusZeroOne.Visibility = Visibility.Visible;
+            btnPlusOne.Visibility = Visibility.Visible;
+            btnMinusOne.Visibility = Visibility.Visible;
+            txtWartosc.Visibility = Visibility.Visible;
+            KalibracjaDouble = KalibracjaPredkoscWiatru;
+            txtWartosc.Text = KalibracjaDouble.ToString();
+            wybrano = 3;
+        }
     }
 }

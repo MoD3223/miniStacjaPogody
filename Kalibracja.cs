@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace miniStacjaPogody
         public int KalibracjaKierunekWiatru { get; set; }
         public int KalibracjaCisnienie { get; set; }
 
-        public static void ZapiszKalibracje(string lokacja)
+        public static void ZapiszKalibracje(string lokacja, int ID, double wartosc)
         {
             string dirPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, lokacja, "Kalibracja.xml");
 
@@ -43,12 +44,55 @@ namespace miniStacjaPogody
                         KalibracjaCisnienie = 0
                     });
                 }
-                DataTemplate.Poprawka(dirPath);
             }
-                
+
+
+            if (ID == 1)
+            {
+                using (var writer = new StreamWriter(dirPath))
+                {
+
+                    var serializer = new XmlSerializer(typeof(Kalibracja));
+                    serializer.Serialize(writer, new Kalibracja
+                    {
+                        KalibracjaTemperatura = wartosc,
+                        KalibracjaTemperaturaOdczuwalna = wartosc
+                    });
+                }
+
+            }
+            else if (ID == 2)
+            {
+                using (var writer = new StreamWriter(dirPath))
+                {
+
+                    var serializer = new XmlSerializer(typeof(Kalibracja));
+                    serializer.Serialize(writer, new Kalibracja
+                    {
+                        KalibracjaWilgotnoscProc = wartosc,
+                        KalibracjaSzansaWystapieniaOpadowProc = wartosc,
+                        KalibracjaZachmurzenieProc = wartosc
+                    });
+                }
+            }
+            else if (ID == 3)
+            {
+                using (var writer = new StreamWriter(dirPath))
+                {
+
+                    var serializer = new XmlSerializer(typeof(Kalibracja));
+                    serializer.Serialize(writer, new Kalibracja
+                    {
+                        KalibracjaPredkoscWiatru = wartosc,
+                        KalibracjaKierunekWiatru = Int32.Parse(wartosc.ToString()),
+                        KalibracjaCisnienie = Int32.Parse(wartosc.ToString())
+                    });
+                }
+            }
+            DataTemplate.Poprawka(dirPath);
+
 
         }
-
 
     }
 }

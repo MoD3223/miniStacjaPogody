@@ -34,22 +34,25 @@
 
         <TextBlock x:Name="LokiData" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Left" MaxWidth="400"/>
         <TextBlock x:Name="txtBlockData" VerticalAlignment="Center" Grid.Row="2" Foreground="White" FontSize="15"/>
-        <TextBlock x:Name="Temperatur" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="3"/>
+        <TextBlock Text="Temperatura" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="3"/>
         <TextBlock x:Name="txtBlockTemp" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="4" Foreground="White" FontSize="15" MaxWidth="400"/>
-        <TextBlock x:Name="Opad" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Top" Grid.Row="5"/>
+        <TextBlock Text="Opady" Foreground="LightBlue" FontSize="24" VerticalAlignment="Top" Grid.Row="5" HorizontalAlignment="Left"/>
         <TextBlock x:Name="txtBlockOpady" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="6" Foreground="White" FontSize="15" MaxWidth="400"/>
-        <TextBlock x:Name="Wiat" Text="" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" Grid.Row="7"/>
+        <TextBlock Text="Wiatr" Foreground="LightBlue" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="7"/>
         <TextBlock x:Name="txtBlockWiatr" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="8" Foreground="White" FontSize="15" MaxWidth="400"/>
 
         <TextBlock x:Name="operacja" Grid.Row="9" VerticalAlignment="Top" TextAlignment="Center" FontSize="24" Grid.ColumnSpan="2"/>
         <Button Click="powrot" Content="Powrot" Grid.Row="9" Width="200" Height="50" Margin="0,0,300,0" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
         <Button x:Name="savebtn" Click="save" Content="Zapisz" Grid.Row="9" Width="200" Height="50" Margin="300,0,0,0" VerticalAlignment="Bottom" IsEnabled="False" Grid.ColumnSpan="2"/>
 
-        <TextBlock x:Name="txtWartosc" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" FontSize="24" TextAlignment="Center"/>
-        <Button x:Name="btnPlusZeroOne" Content="+0,01" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0" Grid.Row="4" Width="50" Grid.Column="1" Click="btnPlusZeroOne_Click"/>
-        <Button x:Name="btnMinusOne" Content="-0,1" HorizontalAlignment="Center" Margin="0,0,0,25" Grid.Row="4" VerticalAlignment="Bottom" Width="50" Grid.Column="1" Click="btnMinusOne_Click"/>
-        <Button x:Name="btnPlusOne" Content="+0,1" HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="4" VerticalAlignment="Top" Width="50" Grid.Column="1" Click="btnPlusOne_Click"/>
-        <Button x:Name="btnMinusZeroOne" Content="-0,01" HorizontalAlignment="Right" Margin="0,0,25,0" Grid.Row="4" VerticalAlignment="Center" Width="50" Grid.Column="1" Click="btnMinusZeroOne_Click"/>
+        <TextBlock x:Name="txtWartosc" Text="0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="4" Grid.Column="1" FontSize="24" TextAlignment="Center" Visibility="Hidden"/>
+        <Button x:Name="btnPlusZeroOne" Content="+0,01" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0" Grid.Row="4" Width="50" Grid.Column="1" Click="btnPlusZeroOne_Click" Visibility="Hidden"/>
+        <Button x:Name="btnMinusOne" Content="-0,1" HorizontalAlignment="Center" Margin="0,0,0,25" Grid.Row="4" VerticalAlignment="Bottom" Width="50" Grid.Column="1" Click="btnMinusOne_Click" Visibility="Hidden"/>
+        <Button x:Name="btnPlusOne" Content="+0,1" HorizontalAlignment="Center" Margin="0,25,0,0" Grid.Row="4" VerticalAlignment="Top" Width="50" Grid.Column="1" Click="btnPlusOne_Click" Visibility="Hidden"/>
+        <Button x:Name="btnMinusZeroOne" Content="-0,01" HorizontalAlignment="Right" Margin="0,0,25,0" Grid.Row="4" VerticalAlignment="Center" Width="50" Grid.Column="1" Click="btnMinusZeroOne_Click" Visibility="Hidden"/>
+        <RadioButton x:Name="rdTemp" Content="" HorizontalAlignment="Left" Margin="138,10,0,0" Grid.Row="3" VerticalAlignment="Top" Visibility="Hidden" Click="rdTemp_Click"/>
+        <RadioButton x:Name="rdOpad" Content="" HorizontalAlignment="Left" Margin="75,10,0,0" Grid.Row="5" VerticalAlignment="Top" Visibility="Hidden" Click="rdOpad_Click"/>
+        <RadioButton x:Name="rdWiat" Content="" HorizontalAlignment="Left" Margin="62,10,0,0" Grid.Row="7" VerticalAlignment="Top" Visibility="Hidden" Click="rdWiat_Click"/>
 
 
 
